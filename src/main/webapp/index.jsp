@@ -5,14 +5,13 @@
 <head>
   <title>Time to DIVE into IVE</title>
 	<script>
-	let ans = confirm("아이브의 세계로 입장하시겠습니까?");
-	if(ans) {
-		location.href="Lobby.lo";
-	}
-	else {
-		window.close();
-	}
-	
+		let ans = confirm("아이브의 세계로 입장하시겠습니까?");
+		if(ans) {
+			location.href="Lobby.mem";
+		}
+		else {
+			window.close();
+		}	
 	</script>
 </head>
 

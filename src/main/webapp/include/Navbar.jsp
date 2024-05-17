@@ -6,14 +6,15 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="Lobby.lo">로비</a></li>
+                            <li class="nav-item"><a class="nav-link" href="Lobby.mem">로비</a></li>
                             <li class="nav-item"><a class="nav-link" href="guestComeCheck.core">출석체크</a></li>
                             <li class="nav-item"><a class="nav-link" href="introduceIVE.jsp">아이브소개</a></li>
                             <li class="nav-item"><a class="nav-link" href="memberInfo.jsp">멤버정보</a></li>
                             <li class="nav-item"><a class="nav-link" href="albumInfo.jsp">앨범정보</a></li>
                             <li class="nav-item"><a class="nav-link" href="cheerInfo.jsp">응원법</a></li>
                             <li class="nav-item"><a class="nav-link" href="login.jsp">로그인</a></li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item"><a class="nav-link" href="MemberJoinForm.mem">회원가입</a></li>
+                            <li class="nav-item dropdown ml-3">
                                 <a class="nav-link dropdown-toggle ml-5" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">사이트맵</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                                     <li><a class="dropdown-item" href="https://cafe.daum.net/IVEstarship" target="_blank">공식 팬카페</a></li>
