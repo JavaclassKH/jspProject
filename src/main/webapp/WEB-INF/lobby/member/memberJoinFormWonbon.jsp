@@ -76,37 +76,44 @@
 <body class="d-flex flex-column h-100">
 <%@ include file="/include/Navbar.jsp"%>
 	<div class="container">
-	<br/><br/>
-		<h1 class="text-center"><font color="gold" size="10em"><strong>회 원 가 입</strong></font></h1>
-		<br/><hr/><br/>
-		<form name="memberLoginForm">
-			<div class="form-group mb-2">
-			  <label for="mid">&nbsp;아이디&nbsp; <a href="javascript:idCheck()" class="badge bg-warning badge-sm">중복확인</a>
-			  <input type="text" name="mid" id="mid" class="form-control mt-2" maxlength="16" autofocus required />
-			  </label>
-			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			  <label for="pwd">&nbsp;비밀번호 
-			  <input type="password" name="pwd" id="pwd" maxlength="14" class="form-control mt-2" required />
-				</label>
-			</div><br/><br/>
-			<div class="form-group mb-2">
-			  <label for="mid">&nbsp;성명
-			  <input type="text" name="mid" id="mid" class="form-control mt-2" maxlength="16" autofocus required />
-			  </label>
-			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			  <label for="pwd">&nbsp;닉네임&nbsp; <a href="javascript:idCheck()" class="badge bg-warning badge-sm">중복확인</a>
-			  <input type="password" name="pwd" id="pwd" maxlength="14" class="form-control mt-2" required />
-				</label>
-			</div><br/>
-			<div class="form-group mb-2">
-			  <label for="mid">&nbsp;전화번호</label>
-			  <input type="text" name="mid" id="mid" style="width:300" class="form-control mt-2" maxlength="16" autofocus required />		
-			  <br/>	  
-			  <label for="pwd">&nbsp;이메일&nbsp; <a href="javascript:idCheck()" class="badge bg-warning badge-sm">중복확인</a></label>
-			  <input type="password" name="pwd" id="pwd" maxlength="14" class="form-control mt-2" required />
-				
-			</div><br/>
-		</form>
+		<div class="mt-6">
+			<table style="height:150px">
+				<tr>
+					<th><font color="gold" size="8em"><strong>회&nbsp; 원&nbsp; 가&nbsp; 입&nbsp; 화&nbsp; 면&nbsp;</strong></font></th>
+				</tr>
+			</table>
+			<form name="memberJoin" method="post">
+			  <b>아이디</b>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="중복확인" onclick="idCheck()" class="btn btn-info btn-sm mb-2" /><br/>
+			  <div class="input-group mb-4">
+			    <input type="text" name="mid" id="mid" placeholder="아이디 입력" maxlength="20" class="form-control" autofocus required />
+			  </div>
+		  	<b>비밀번호</b><br/>
+			  <div class="input-group mb-4">
+			    <input type="password" name="pwd" id="pwd" placeholder="비밀번호 입력" maxlength="14" class="form-control" required />
+			  </div>
+			 	<b>닉네임</b>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="중복확인" onclick="nickNameCheck()" class="btn btn-info btn-sm mb-2" /><br/>
+			  <div class="input-group mb-4">
+			    <input type="text" name="nickName" id="nickName" placeholder="닉네임 입력" class="form-control" required />
+			  </div>
+			 	<b>성명</b><br/>
+			  <div class="input-group mb-4">
+			    <input type="text" name="name" id="name" placeholder="성명 입력" maxlength="8" class="form-control" required />
+			  </div>
+			  <b>전화번호</b><br/>
+			  <div class="input-group mb-4">
+			    <input type="text" name="contact" id="contact" placeholder="전화번호 입력" class="form-control" required />
+			  </div>
+			  <b>이메일</b><br/>
+			  <div class="input-group mb-4">
+			    <input type="text" name="email" id="email" placeholder="이메일 입력" class="form-control" required />
+			  </div>
+				<div class="text-right">
+					<input type="reset" value="다시작성" class="btn btn-danger mr-4" />
+					<input type="button" value="돌아가기" onclick="location.href='Lobby.mem'" class="btn btn-warning mr-4" />
+					<input type="button" value="회원가입" onclick="memberJoinOkCheck()" class="btn btn-success" />
+				</div>
+			</form>
+		</div>
 	</div>	
 	<%@ include file="/include/footer.jsp"%>
 	<!-- Bootstrap core JS-->
