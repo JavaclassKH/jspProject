@@ -21,15 +21,18 @@
 		let nickNameCheckSw = 0;		
 		
 		/* <<< 정규식 >>> */ 
-		// 이름: 한글
-		const regName= /^[가-힣]+$/;   
+		// 이름: 한글 2~6자
+		const regName= /^[가-힣]{2,6}$/;   
 		// 아이디: 영문 대/소문자와 숫자만을 사용한 4~16자
 		const regMid= /^[A-Za-z0-9]{4,16}$/;  
 		// 비밀번호:  대문자 1개이상, 소문자 1개이상, 숫자 1개이상, 특수문자 1개이상을 포함한 10~16자
 		const regPwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,16}$/; 
+		// 닉네임: 영문/대 소문자, 한글, 숫자만을 사용한 4~12자
+		const regNickName = /^[A-Za-z가-힣0-9]{4,12}$/;  
 		// 휴대폰번호: 앞번호 3 글자, 중간번호 3또는 4글자, 마지막번호는 4글자. 하이픈 포함 X
-		const expHpText = /^\d{3}\d{3,4}\d{4}$/;
-		
+		const regContact = /^\d{3}\d{3,4}\d{4}$/;
+		// 이메일: 맨 앞은 영문 대/소문자,숫자,밑줄과 하이픈만을 사용한 4~12 글자, 골뱅이 뒤는 영문 대/소문자,숫자,밑줄과 하이픈만을 사용한 4~8 글자
+		/* const regEmail = /^[a-zA-Z0-9._-]{4,12}+@[a-zA-Z0-9.-]{4,8}+\.[a-zA-Z]{2,4}$/; */
 
 		// 아이디 중복체크
 		function idCheck() {
@@ -115,22 +118,46 @@
 			let email2 = $("email1").val();
 			email += email1 + '@' + email2;
 			
-			console.log(mid);
-			console.log(pwd);
-			console.log(name);
-			console.log(nickName);
-			console.log(contact);
-			console.log(email);
-			
-			if(idCheckSw != 1) {
-				alert("아이디 중복체크를 진행해주세요");				
+			if(name.match(regName) == false) {
+				alert("이름 형식에 맞게 작성해주세요!");
+				alert("한글 2~6자");
+				return;
 			}
-			else if(nickNameCheckSw != 1){
-				alert("닉네임 중복체크를 진행해주세요");		
+			else if(mid.match(regName) == false) {
+				alert("아이디 형식에 맞게 작성해주세요!");
+				alert("영문 대/소문자와 숫자만을 사용한 4~16자");
+				return;				
 			}
+			else if(pwd.match(regPwd) == false) {
+				alert("비밀번호 형식에 맞게 작성해주세요!");
+				alert("대문자 1개이상, 소문자 1개이상, 숫자 1개이상, 특수문자 1개이상을 포함한 10~16자");
+				return;				
+			}
+			else if(nickName.match(regNickName) == false) {
+				alert("닉네임 형식에 맞게 작성해주세요!");
+				alert("영문/대 소문자, 한글, 숫자만을 사용한 4~12자");
+				return;				
+			}
+			else if(contact.match(regContact) == false) {
+				alert("전화번호 형식에 맞게 작성해주세요!");
+				alert("앞번호 3자, 중간번호 3~4자, 마지막번호 4자");
+				return;				
+			}
+/* 			else if(email.match(regEmail) == false;) {
+				alert("이메일 형식에 맞게 작성해주세요!"); 
+				return;				
+			} */
 			else {
-				memberJoinForm.submit();
-			}
+				if(idCheckSw != 1) {
+					alert("아이디 중복체크를 진행해주세요");				
+				}
+				else if(nickNameCheckSw != 1){
+					alert("닉네임 중복체크를 진행해주세요");		
+				}
+				else {
+					memberJoinForm.submit();
+				}
+			}			
 		}
 		
 		
