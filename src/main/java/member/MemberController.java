@@ -27,10 +27,18 @@ public class MemberController extends HttpServlet {
 		else if(com.equals("/MemberJoinForm")) {
 			viewPage += "/member/memberJoinForm.jsp";
 		}
+		else if(com.equals("/MemberMidNickNameCheck")) {
+			command = new MemberMidNickNameCheckCommand();
+			command.execute(request, response);
+			return;
+		}
 		else if(com.equals("/MemberJoinOk")) {
 			command = new MemberJoinOkCommand();
 			command.execute(request, response);
-			viewPage += "/member/memberJoinOk.jsp";
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/MemberLogin")) {
+			viewPage += "/member/memberLoginForm.jsp";
 		}
 		else if(com.equals("/")) {
 			
