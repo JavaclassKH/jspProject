@@ -12,7 +12,7 @@
                             <li class="nav-item"><a class="nav-link" href="memberInfo.jsp">멤버정보</a></li>
                             <li class="nav-item"><a class="nav-link" href="albumInfo.jsp">앨범정보</a></li>
                             <li class="nav-item"><a class="nav-link" href="cheerInfo.jsp">응원법</a></li>
-                            <li class="nav-item"><a class="nav-link" href="login.jsp">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link" href="MemberLogin.mem">로그인</a></li>
                             <li class="nav-item"><a class="nav-link" href="MemberJoinForm.mem">회원가입</a></li>
                             <li class="nav-item dropdown ml-3">
                                 <a class="nav-link dropdown-toggle ml-5" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">사이트맵</a>

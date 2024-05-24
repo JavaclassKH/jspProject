@@ -1,19 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file = "/include/basicInHead.jsp"%> 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<title>Time to DIVE into IVE</title>
 	<script>
 		'use strict';
-		
-		/*  정규식 잠시 봉인
-			let regMid = /^[a-zA-Z0-9_]{4,20}$/;	  // 아이디는 4~20길이의 영문 대/소문자와 숫자와 밑줄 가능
-			let regPwd = "";                        // 비밀번호는 8~14길이의 영문 대/소문자와 숫자와 밑줄과 특수문자 가능
-		  let regName = /^[가-힣a-zA-Z]+$/;        // 이름은 최대 8자의 한글/영문 가능
-		  let regNickName = /^[가-힣0-9_]+$/;		  	// 닉네임은 8~14길이의 한글, 숫자, 밑줄만 가능
-		  let reg
-		*/
 		
 		// 아이디,닉네임 중복확인용 스위치, 분류용 체크
 		let whatCheck = '';
@@ -23,8 +15,8 @@
 		/* <<< 정규식 >>> */ 
 		// 이름: 한글 2~6자
 		const regName= /^[가-힣]{2,6}$/;   
-		// 아이디: 영문 대/소문자와 숫자만을 사용한 4~16자
-		const regMid= /^[A-Za-z0-9]{4,16}$/;  
+		// 아이디: 영문 대/소문자와 숫자만을 사용한 6~12자
+		const regMid= /^[A-Za-z0-9]{6,12}$/;  
 		// 비밀번호:  대문자 1개이상, 소문자 1개이상, 숫자 1개이상, 특수문자 1개이상을 포함한 10~16자
 		const regPwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,16}$/; 
 		// 닉네임: 영문/대 소문자, 한글, 숫자만을 사용한 4~12자
@@ -32,7 +24,7 @@
 		// 휴대폰번호: 앞번호 3 글자, 중간번호 3또는 4글자, 마지막번호는 4글자. 하이픈 포함 X
 		const regContact = /^\d{3}\d{3,4}\d{4}$/;
 		// 이메일: 맨 앞은 영문 대/소문자,숫자,밑줄과 하이픈만을 사용한 4~12 글자, 골뱅이 뒤는 영문 대/소문자,숫자,밑줄과 하이픈만을 사용한 4~8 글자
-		/* const regEmail = /^[a-zA-Z0-9._-]{4,12}+@[a-zA-Z0-9.-]{4,8}+\.[a-zA-Z]{2,4}$/; */
+		const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
 
 		// 아이디 중복체크
 		function idCheck() {
@@ -55,7 +47,6 @@
 							idCheckSw = 1;
 						}
 						else {
-							console.log(res);
 							alert("이미 사용중인 아이디입니다");
 							$("#mid").focus();
 						}
@@ -69,8 +60,7 @@
 		
 		// 닉네임 중복체크
 		function nickNameCheck() {
-			// let nickName = document.getElementById("nickName").value;
-			let nickName = $("#nickName").val();
+			let nickName = document.getElementById("nickName").value;
 			if(nickName.trim() == "") {
 				alert("닉네임을 입력하세요");
 				$("#nickName").focus();
@@ -107,46 +97,54 @@
 			let name = $("#name").val();
 			let nickName = $("#nickName").val();
 			
+			console.log(mid);
+			console.log(pwd);
+			console.log(name);
+			console.log(nickName);
+			
 			let contact = '';
 			let contact1 = $("#contact1").val();
 			let contact2 = $("#contact2").val();
 			let contact3 = $("#contact3").val();
 			contact += contact1 + contact2 + contact3;
+			console.log(contact);
 			
 			let email = '';
-			let email1 = $("email1").val();
-			let email2 = $("email1").val();
-			email += email1 + '@' + email2;
+			let email1 = $("#email1").val();
+			let email2 = $("#email2").val();
+			let email3 = $("#email3").val();
+			email += email1 + email2 + email3;
+			console.log(email);
 			
-			if(name.match(regName) == false) {
-				alert("이름 형식에 맞게 작성해주세요!");
-				alert("한글 2~6자");
-				return;
-			}
-			else if(mid.match(regName) == false) {
+			if(!mid.match(regMid)) {
 				alert("아이디 형식에 맞게 작성해주세요!");
-				alert("영문 대/소문자와 숫자만을 사용한 4~16자");
-				return;				
+				alert("영문 대/소문자와 숫자만을 사용한 6~12자");
+				$("#mid").focus();				
 			}
-			else if(pwd.match(regPwd) == false) {
+			else if(!pwd.match(regPwd)) {
 				alert("비밀번호 형식에 맞게 작성해주세요!");
 				alert("대문자 1개이상, 소문자 1개이상, 숫자 1개이상, 특수문자 1개이상을 포함한 10~16자");
-				return;				
+				$("#pwd").focus();					
 			}
-			else if(nickName.match(regNickName) == false) {
+			else if(!name.match(regName)) {
+				alert("이름 형식에 맞게 작성해주세요!");
+				alert("한글 2~6자");
+				$("#name").focus();
+			}
+			else if(!nickName.match(regNickName)) {
 				alert("닉네임 형식에 맞게 작성해주세요!");
 				alert("영문/대 소문자, 한글, 숫자만을 사용한 4~12자");
-				return;				
+				$("#nickName").focus();		
 			}
-			else if(contact.match(regContact) == false) {
+			else if(!contact.match(regContact)) {
 				alert("전화번호 형식에 맞게 작성해주세요!");
 				alert("앞번호 3자, 중간번호 3~4자, 마지막번호 4자");
-				return;				
+				$("#contact").focus();				
 			}
-/* 			else if(email.match(regEmail) == false;) {
+ 			else if(!email.match(regEmail)) {
 				alert("이메일 형식에 맞게 작성해주세요!"); 
-				return;				
-			} */
+				$("#email").focus();					
+			} 
 			else {
 				if(idCheckSw != 1) {
 					alert("아이디 중복체크를 진행해주세요");				
@@ -160,13 +158,33 @@
 			}			
 		}
 		
+		// 아이디,비밀번호 찾기 준비중
+		function ready(e) {
+			if(e == 'm') {
+				alert("아이디 찾기 기능을 준비중입니다.");
+			}
+			else {
+				alert("비밀번호 찾기 기능을 준비중입니다.");
+			}
+		}
+		
 		
 	</script>
 	<style>
+	
 	body {
 		margin: 0px;
 		padding: 0px;
-		background-color: beige;
+		background-color: #f4f5f6;
+	}
+	
+	th {
+		width: 30%;
+		text-align: left;
+	}
+	
+	tr {
+		width: 70%;
 	}
 	
 	.join {
@@ -185,18 +203,9 @@
 		left: 80px;
 	}
 	
-	.bt1 {
-		position: relative;
-		bottom: 159px;
-	}
-	
-	.bt2 {
-		position: absolute;
-	}
-	
-	.bt3 {
-		position: relative;
-		top: 257px;
+	input[type="button"] {
+		width: 12%;
+		margin-right: 30px;
 	}
 	
 	
@@ -205,66 +214,80 @@
 </head>
 <body class="d-flex flex-column h-100">
 <%@ include file="/include/Navbar.jsp" %>
-		<br/>
-		<h1 class="text-center"><font color="gold" size="10em"><strong>회 원 가 입</strong></font></h1>
+		<br/><br/>
+		<h1 class="text-center"><font color="navy" size="10em"><strong>회 원 가 입</strong></font></h1>
 		<br/><hr/>
 		<div class="container">
-			<form name="memberJoinForm" method="post" action="MemberJoinOk.mem">
-				<div class="join">
-					<div class="form-group mb-4">
-					  <label for="mid">아이디</label><input type="button" value="중복확인" onclick="idCheck()" class="btn btn-warning btn-sm" />
-					  <input type="text" style="width:650px" name="mid" id="mid" placeholder="아이디를 입력하세요" class="form-control mt-2" maxlength="16" autofocus required />			  
-					</div>
-					<div class="form-group mb-2">
-					  <label for="pwd">비밀번호 </label>
-					  <input type="password" style="width:650px" name="pwd" id="pwd" maxlength="14" placeholder="비밀번호를 입력하세요" class="form-control mt-2" required />		
-					<br/>
-					<div class="form-group mb-4">
-					  <label for="name">성명</label>
-					  <input type="text" style="width:650px" name="name" id="name" placeholder="성명을 입력하세요" class="form-control mt-2" maxlength="16" required />				  
-					 </div>
-					<div class="form-group mb-2">
-					  <label for="nickName">닉네임<input type="button" value="중복확인" onclick="nickNameCheck()" class="btn btn-warning btn-sm" />
-					  <input type="text" style="width:650px" name="nickName" id="nickName" maxlength="14" class="form-control mt-2" required />
-						</label>
-					</div><br/>
-				  <label for="contact">전화번호(휴대폰)</label>
-						<div class="form-group mb-2">
-			   			<select name="contact" id="contact1" style="width:180px; float:left" class="form-control" disabled>
-			   				<option value="010" selected>010</option>
-			   			</select>
-			   			<input type="text" maxlength="4" name="contact" id="contact2" class="form-control" style="width:235px; float:left" />
-			   			<input type="text" maxlength="4" name="contact" id="contact3" class="form-control" style="width:235px; float:left" />
-						  <br/>	 
+		<br/><br/>
+		<form name="memberJoinForm" method="post" action="MemberJoinOk.mem"> 
+			<table id="LoginFormTable" class="table table-bordered">
+				<tr>
+					<th>아이디&nbsp;&nbsp;&nbsp;
+						<input type="button" style="width:80px" value="중복확인" onclick="idCheck()" class="btn btn-primary btn-sm">
+					</th>
+					<td>
+						<input type="text" name="mid" id="mid" maxlength="12" placeholder="아이디를 입력하세요" class="form-control p-1" autofocus required />
+					</td>
+				</tr>			
+				<tr>
+					<th>비밀번호</th>
+					<td>
+						<input type="password" name="pwd" id="pwd" maxlength="16" placeholder="비밀번호를 입력하세요" class="form-control p-1" required />
+					</td>
+				</tr>					
+				<tr>
+					<th>이름</th>
+					<td>
+						<input type="text" name="name" id="name" maxlength="6" placeholder="이름를 입력하세요" class="form-control p-1" required />
+					</td>
+				</tr>					
+				<tr>
+					<th>닉네임&nbsp;&nbsp;&nbsp;
+						<input type="button" style="width:80px" value="중복확인" onclick="nickNameCheck()" class="btn btn-primary btn-sm">
+					</th>
+					<td>
+						<input type="text" name="nickName" id="nickName" maxlength="12" placeholder="닉네임을 입력하세요" class="form-control p-1" required />
+					</td>
+				</tr>					
+				<tr>
+					<th>
+					휴대폰번호<br/>[ ※ 010 번호만 가입이 가능합니다 ]
+					</th>
+					<td>
+						<div class="input-group">
+							<input type="text" style="width:20%; text-align: center;" name="contact" id="contact1" value="010" class="form-control p-1" disabled />
+							<input type="text" style="width:40%" name="contact" id="contact2" class="form-control p-1" required />
+							<input type="text" style="width:40%" name="contact" id="contact3" class="form-control p-1" required />
 						</div>
-						<br/>   
-						<label for="email">이메일</label><br/>
-						<div class="input-group mb-3" style="width:650px">
-	      			<input type="text" style="width:315px" class="form-control" name="email" id="email1" />
-	      			<div class="input-group-prepend">
-	        			<input type="text" style="width:50px" class="form-control" value="@" disabled />
-	      			</div>
-	      				<input type="text" style="width:285px" placeholder="" class="form-control" name="email" id="email2" />
-	    				</div>
-					</div>
-				</div>
-				<div class="joinBtns">
-						<div class="bt1" style="width:160px">
-							<input type="button" value="회원가입" onclick="memberJoinCheck()" style="width:150px;" class="btn btn-success" />
+					</td>
+				</tr>					
+				<tr>
+					<th>이메일</th>
+					<td>
+						<div class="input-group">
+							<input type="text" style="width:40%;" name="email" id="email1" class="form-control p-1" required />
+							<input type="text" style="width:10%; text-align: center;" value="@" name="email" id="email2" class="form-control p-1" disabled />
+							<input type="text" style="width:40%" name="email" id="email3" class="form-control p-1" required />
 						</div>
-						<div class="bt2" style="width:160px">
-							<input type="reset" value="다시작성" style="width:150px;" class="btn btn-danger" />					
-						</div>						
-						<div class="bt3" style="width:160px">
-							<input type="button" value="로비가기" onclick="location.href='Lobby.mem';" style="width:150px; color:white;" class="btn btn-info" />
+					</td>
+				</tr>					
+				<tr>
+					<td colspan="2">
+						<div class="input-group-append text-center">
+							<input type="button" value="회원가입" onclick="memberJoinCheck()" class="btn btn-success" />
+							<input type="reset" style="width:12%; margin-right:40px;" value="다시작성" class="btn btn-danger" />
+							<input type="button" style="width:12%; margin-right:40px;" value="로그인하기" onclick="location.href='MemberLogin.mem';" class="btn btn-warning" />
+							<input type="button" value="아이디찾기" onclick="ready('m')" class="btn btn-info" />
+							<input type="button" value="비밀번호재설정" onclick="ready('p')" class="btn btn-info" />
 						</div>
-				</div>
-			</form>
-		</div>	
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>	
+	<p><br/></p>
 	<%@ include file="/include/footer.jsp"%>
-	<!-- Bootstrap core JS-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
 	<script src="js/scripts.js"></script>
 </body>
 </html>
